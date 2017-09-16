@@ -1,9 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/SampleAnimation.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MoveFieldCollider.cs">
     <Files>
-      <File FileName="Assets/Script/SampleAnimation.cs" Line="16" Column="28" />
+      <File FileName="Assets/Script/SampleAnimation.cs" Line="66" Column="1" />
+      <File FileName="Assets/MoveFieldCollider.cs" Line="16" Column="3" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Test_Motion" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

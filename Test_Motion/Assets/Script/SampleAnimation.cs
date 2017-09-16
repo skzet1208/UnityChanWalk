@@ -6,7 +6,7 @@ public class SampleAnimation : MonoBehaviour
 {
 	// Public
 	public float speed;
-	public float jump_speed;
+	public float jumpLateStartTime;
 
 	// Private
 	private float speedMultiple = 1.0f;
@@ -41,12 +41,12 @@ public class SampleAnimation : MonoBehaviour
 		characterControl ();
 
 		// Run Speed
-		speedMultiple = (Input.GetAxis ("Run") != 0) ? 2.0f : 1.0f;
+		speedMultiple = (Input.GetAxis ("Run") != 0) ? 2.2f : 1.0f;
 
 		// 自身の向きベクトル取得(ラジアン角)
 		if (moveHorizontal != 0) {
 			float turnDirection = moveHorizontal > 0 ? 1.0f : -1.0f;
-			transform.Rotate (new Vector3 (0, (1.5f * turnDirection), 0));
+			transform.Rotate (new Vector3 (0, (1.2f * turnDirection * speedMultiple), 0));
 		}
 		float angleDir = transform.eulerAngles.y * (Mathf.PI / 180.0f);
 
@@ -64,7 +64,6 @@ public class SampleAnimation : MonoBehaviour
 	{
 		foreach (ContactPoint contact in collision.contacts) {
 			if (contact.otherCollider.gameObject.tag == "Field" && jumpFlg) {
-				Debug.Log ("着地！");
 				jumpFlg = false;
 			}
 		}
@@ -78,14 +77,16 @@ public class SampleAnimation : MonoBehaviour
 
 	void characterControl ()
 	{
+		float moveVertical = Input.GetAxis ("Vertical"); // z:前後
+
 		// Check Push Shift Key
 		bool isShift = Input.GetAxis ("Run") > 0;
 
 		// Walk & Run
-		if (Input.GetKey (KeyCode.UpArrow) && isShift) {
+		if (moveVertical > 0.0f && isShift) {
 			animator.SetBool (key_isRun, true);
 			animator.SetBool (key_isWalk, false);
-		} else if (Input.GetKey (KeyCode.UpArrow) && !isShift) {
+		} else if (moveVertical > 0.0f && !isShift) {
 			animator.SetBool (key_isWalk, true);
 			animator.SetBool (key_isRun, false);
 		} else {
@@ -100,7 +101,7 @@ public class SampleAnimation : MonoBehaviour
 			jumpFlg = true;
 
 			// 重力フラグ判定
-			StartCoroutine (LateStart (0.7f));
+			StartCoroutine (LateStart (jumpLateStartTime));
 		} else {
 			animator.SetBool (key_isJump, false);
 		}
